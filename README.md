@@ -13,16 +13,18 @@ None
 Available variables are listed below, along with default values:
 
     vault_backend:
-      backend: consul
-      address: 127.0.0.1:8500
-      path: vault
+      type: consul
+      options:
+        address: 127.0.0.1:8500
+        path: vault
     vault_listener:
-      listener: tcp
-      address: 127.0.0.1:8200
-      tls_disable: True
+      type: tcp
+      options:
+        address: 127.0.0.1:8200
+        tls_disable: '1'
     vault_telemetry:
       statsite_address: 127.0.0.1:8125
-      disable_hostname: True
+      disable_hostname: 'true'
 
 ## Dependencies
 
@@ -34,9 +36,10 @@ Available variables are listed below, along with default values:
       roles:
         - role: tkimball83.vault
           vault_listener:
-            listener: tcp
-            address: "{{ ansible_default_ipv4.address }}:8200"
-            tls_disable: True
+            type: tcp
+            options:
+              address: "{{ ansible_default_ipv4.address }}:8200"
+              tls_disable: '1'
 
 ## License
 

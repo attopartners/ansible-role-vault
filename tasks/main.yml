@@ -8,13 +8,19 @@
     update_cache=yes
   register: vault_yum
 
-- name: template | /etc/vault/vault.hcl
+- block:
+    - name: template | /etc/vault/vault.hcl
+      template:
+        src=vault.hcl.j2
+        dest=/etc/vault/vault.hcl
+        owner=root
+        group=root
+        mode=0600
+    - name: service | vault
+      service:
+        name=vault
+        enabled=yes
+        state=started
   tags: vault
-  template:
-    src=vault.hcl.j2
-    dest=/etc/vault/vault.hcl
-    owner=root
-    group=root
-    mode=0600
   when: vault_yum|success
 

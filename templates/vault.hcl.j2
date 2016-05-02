@@ -1,8 +1,11 @@
 {% if vault_backend is defined %}
-backend "{{ vault_backend.backend }}" {
-  address = "{{ vault_backend.address }}"
-  path = "{{ vault_backend.path }}"
+{%   if vault_backend.type is defined %}
+backend "{{ vault_backend.type }}" {
+{%     for vb_key, vb_value in vault_backend.iteritems()|sort %}
+  {{ vb_key }} = "{{ vb_value }}"
+{%     endfor %}
 }
+{%   endif %}
 {% else %}
 backend "consul" {
   address = "127.0.0.1:8500"
@@ -11,18 +14,13 @@ backend "consul" {
 {% endif %}
 
 {% if vault_listener is defined %}
-listener "{{ vault_listener.listener }}" {
-  address = "{{ vault_listener.address }}"
-{%   if vault_listener.tls_disable is defined %}
-{%     if vault_listener.tls_disable %}
-  tls_disable = 1
-{%     else %}
-  tls_disable = 0
-{%     endif %}
-{%   else %}
-  tls_disable = 1
-{%   endif %}
+{%   if vault_listener.type is defined %}
+listener "{{ vault_listener.type }}" {
+{%     for vl_key, vl_value in vault_listener.iteritems()|sort %}
+  {{ vl_key }} = "{{ vl_value }}"
+{%     endfor %}
 }
+{%   endif %}
 {% else %}
 listener "tcp" {
   address = "127.0.0.1:8200"
@@ -32,16 +30,9 @@ listener "tcp" {
 
 {% if vault_telemetry is defined %}
 telemetry {
-  statsite_address = "{{ vault_telemetry.statsite_address }}"
-{%   if vault_telemetry.disable_hostname is defined %}
-{%     if vault_telemetry.disable_hostname %}
-  disable_hostname = true
-{%     else %}
-  disable_hostname = false
-{%     endif %}
-{%   else %}
-  disable_hostname = true
-{%   endif %} 
+{%   for vt_key, vt_value in vault_telemetry.iteritems()|sort %}
+  {{ vt_key }} = "{{ vt_value }}"
+{%   endfor %}
 }
 {% else %}
 telemetry {
