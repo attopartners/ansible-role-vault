@@ -16,6 +16,8 @@
         owner=root
         group=root
         mode=0600
+      notify:
+        - service | vault | restarted
     - name: service | vault
       service:
         name=vault

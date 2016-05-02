@@ -1,0 +1,7 @@
+---
+- name: service | vault | restarted
+  tags: vault
+  service:
+    name=vault
+    state=restarted
+
