@@ -1,7 +1,7 @@
 {% if vault_backend is defined %}
 {%   if vault_backend.type is defined %}
 backend "{{ vault_backend.type }}" {
-{%     for vb_key, vb_value in vault_backend.iteritems()|sort %}
+{%     for vb_key, vb_value in vault_backend.options.iteritems()|sort %}
   {{ vb_key }} = "{{ vb_value }}"
 {%     endfor %}
 }
@@ -16,7 +16,7 @@ backend "consul" {
 {% if vault_listener is defined %}
 {%   if vault_listener.type is defined %}
 listener "{{ vault_listener.type }}" {
-{%     for vl_key, vl_value in vault_listener.iteritems()|sort %}
+{%     for vl_key, vl_value in vault_listener.options.iteritems()|sort %}
   {{ vl_key }} = "{{ vl_value }}"
 {%     endfor %}
 }
