@@ -1,0 +1,13 @@
+---
+vault_backend:
+  backend: consul
+  address: 127.0.0.1:8500
+  path: vault
+vault_listener:
+  listener: tcp
+  address: 127.0.0.1:8200
+  tls_disable: True
+vault_telemetry:
+  statsite_address: 127.0.0.1:8125
+  disable_hostname: True
+
