@@ -1,11 +1,9 @@
-{% if vault_backend is defined %}
-{%   if vault_backend.type is defined %}
+{% if vault_backend is defined and vault_backend.type is defined %}
 backend "{{ vault_backend.type }}" {
-{%     for vb_key, vb_value in vault_backend.options.iteritems()|sort %}
+{%   for vb_key, vb_value in vault_backend.options.iteritems()|sort %}
   {{ vb_key }} = "{{ vb_value }}"
-{%     endfor %}
+{%   endfor %}
 }
-{%   endif %}
 {% else %}
 backend "consul" {
   address = "127.0.0.1:8500"
@@ -13,14 +11,12 @@ backend "consul" {
 }
 {% endif %}
 
-{% if vault_listener is defined %}
-{%   if vault_listener.type is defined %}
+{% if vault_listener is defined and vault_listener.type is defined %}
 listener "{{ vault_listener.type }}" {
-{%     for vl_key, vl_value in vault_listener.options.iteritems()|sort %}
+{%   for vl_key, vl_value in vault_listener.options.iteritems()|sort %}
   {{ vl_key }} = "{{ vl_value }}"
-{%     endfor %}
+{%   endfor %}
 }
-{%   endif %}
 {% else %}
 listener "tcp" {
   address = "127.0.0.1:8200"
