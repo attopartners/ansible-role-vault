@@ -1,7 +1,6 @@
 ---
 dependencies:
   - tkimball83.tkimball83
-
 galaxy_info:
   author: tkimball83
   description: "HashiCorp's vault for RHEL/CentOS"
@@ -15,4 +14,5 @@ galaxy_info:
   galaxy_tags:
     - system
     - vault
+version: 1.0
 
