@@ -1,38 +1,51 @@
-{% if vault_backend is defined and vault_backend.type is defined %}
-backend "{{ vault_backend.type }}" {
-{%   for vb_key, vb_value in vault_backend.options.iteritems()|sort %}
-  {{ vb_key }} = {{ vb_value }}
-{%   endfor %}
-}
-{% else %}
 backend "consul" {
+{% if vault_backend_address is defined %}
+  address = "{{ vault_backend_address }}"
+{% else %}
   address = "127.0.0.1:8500"
+{% endif %}
+O% if vault_backend_path is defined %}
+  path = "{{ vault_backend_path }}
+{% else %}
   path = "vault"
-}
 {% endif %}
-
-{% if vault_listener is defined and vault_listener.type is defined %}
-listener "{{ vault_listener.type }}" {
-{%   for vl_key, vl_value in vault_listener.options.iteritems()|sort %}
-  {{ vl_key }} = {{ vl_value }}
-{%   endfor %}
 }
-{% else %}
+
 listener "tcp" {
-  address = "127.0.0.1:8200"
-  tls_disable = 1
-}
-{% endif %}
-
-{% if vault_telemetry is defined %}
-telemetry {
-{%   for vt_key, vt_value in vault_telemetry.iteritems()|sort %}
-  {{ vt_key }} = {{ vt_value }}
-{%   endfor %}
-}
+{% if vault_listener_address is defined %}
+  address = "{{ vault_listener_address }}"
 {% else %}
+  address = "127.0.0.1:8200"
+{% endif %}
+{% if vault_listener_tls_disable is defined %}
+{%   if vault_listener_tls_disable %}
+  tls_disable = 1
+{%   else %}
+  tls_disable = 0
+{%   endif %}
+{% else %}
+  tls_disable = 1
+{% endif %}
+}
+
+{% if vault_telemetry_enable is defined and vault_telemtry_enable %}
 telemetry {
-  statsite_address = "127.0.0.1:8125"
+{%   if vault_telemetry_disable_hostname is defined %}
+{%     if vault_telemetry_disable_hostname %}
   disable_hostname = true
+{%     else %}
+  disable_hostname = false
+{%     endif %}
+{%   else %}
+  disable_hostname = true
+{%   endf %}
+{%   if vault_telemetry_statsd_address is defined %}
+  statsd_address = "{{ vault_telemetry_statsd_address }}"
+{%   endif %}
+{%   if vault_telemetry_statsite_address is defined %}
+  statsite_address = "{{ vault_telemetry_statsite_address }}"
+{%   else %}
+  statsite_address = "127.0.0.1:8125"
+{%   endif %}
 }
 {% endif %}
