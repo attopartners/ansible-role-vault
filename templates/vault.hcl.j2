@@ -1,7 +1,7 @@
 {% if vault_backend is defined and vault_backend.type is defined %}
 backend "{{ vault_backend.type }}" {
 {%   for vb_key, vb_value in vault_backend.options.iteritems()|sort %}
-  {{ vb_key }} = "{{ vb_value }}"
+  {{ vb_key }} = {{ vb_value }}
 {%   endfor %}
 }
 {% else %}
@@ -14,7 +14,7 @@ backend "consul" {
 {% if vault_listener is defined and vault_listener.type is defined %}
 listener "{{ vault_listener.type }}" {
 {%   for vl_key, vl_value in vault_listener.options.iteritems()|sort %}
-  {{ vl_key }} = "{{ vl_value }}"
+  {{ vl_key }} = {{ vl_value }}
 {%   endfor %}
 }
 {% else %}
@@ -27,7 +27,7 @@ listener "tcp" {
 {% if vault_telemetry is defined %}
 telemetry {
 {%   for vt_key, vt_value in vault_telemetry.iteritems()|sort %}
-  {{ vt_key }} = "{{ vt_value }}"
+  {{ vt_key }} = {{ vt_value }}
 {%   endfor %}
 }
 {% else %}
