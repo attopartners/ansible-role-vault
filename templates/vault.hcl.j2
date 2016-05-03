@@ -28,7 +28,7 @@ backend "consul" {
 {%   if vault_backend_tls_skip_verify %}
   tls_skip_verify = 1
 {%   else %}
-  tls_skip_verify = 0 
+  tls_skip_verify = 0
 {%   endif %}
 {% endif %}
 {% if vault_backend_token is defined %}
