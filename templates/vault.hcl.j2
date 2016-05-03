@@ -38,7 +38,7 @@ telemetry {
 {%     endif %}
 {%   else %}
   disable_hostname = true
-{%   endf %}
+{%   endif %}
 {%   if vault_telemetry_statsd_address is defined %}
   statsd_address = "{{ vault_telemetry_statsd_address }}"
 {%   endif %}
