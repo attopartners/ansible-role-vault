@@ -4,8 +4,8 @@ backend "consul" {
 {% else %}
   address = "127.0.0.1:8500"
 {% endif %}
-O% if vault_backend_path is defined %}
-  path = "{{ vault_backend_path }}
+{% if vault_backend_path is defined %}
+  path = "{{ vault_backend_path }}"
 {% else %}
   path = "vault"
 {% endif %}
