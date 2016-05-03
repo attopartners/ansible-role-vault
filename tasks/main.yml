@@ -9,15 +9,19 @@
   register: vault_yum
 
 - block:
-    - name: template | /etc/vault/vault.hcl
+    - name: template | {{ item.dst }}
       template:
-        src=vault.hcl.j2
-        dest=/etc/vault/vault.hcl
+        src={{ item.src }}
+        dest={{ item.dst }}
         owner=root
         group=root
-        mode=0600
+        mode={{ item.mode }}
       notify:
         - service | vault | restarted
+      with_items:
+        - { src: vault.hcl.j2, dst: /etc/vault/vault.hcl, mode: '0600' }
+        - { src: vault.logrotate.j2, dst: /etc/logrotate.d/vault, mode: '0644' }
+        - { src: vault.sysconfig.j2, dst: /etc/sysconfig/vault, mode: '0644' }
     - name: service | vault
       service:
         name=vault

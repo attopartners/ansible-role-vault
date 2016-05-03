@@ -22,6 +22,7 @@ Available variables are listed below, along with default values:
 
 Additional variables available, not defined by default:
 
+    vault_bin: /usr/sbin/vault
     vault_backend_scheme: https
     vault_backend_token: xxxxxx
     vault_backend_max_parallel: 128
@@ -29,9 +30,13 @@ Additional variables available, not defined by default:
     vault_backend_tls_ca_file: /path/to/ca/file
     vault_backend_tls_cert_file: /path/to/cert/file
     vault_backend_tls_key_file: /path/to/key/file
+    vault_config_path: /etc/vault/vault.hcl
     vault_listener_tls_cert_file: /path/to/cert/file
     vault_listener_tls_key_file: /path/to/key/file
     vault_listener_tls_min_version: tls12
+    vault_log_file: /var/log/vault.log
+    vault_log_level: info
+    vault_pid_file: /var/run/vault.pid
 
 ## Dependencies
 
