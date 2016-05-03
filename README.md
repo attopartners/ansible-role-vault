@@ -25,7 +25,7 @@ Additional variables available, not defined by default:
     vault_backend_scheme: https
     vault_backend_token: xxxxxx
     vault_backend_max_parallel: 128
-    vault_backend_tls_skip_verify: false
+    vault_backend_tls_skip_verify: False
     vault_backend_tls_ca_file: /path/to/ca/file
     vault_backend_tls_cert_file: /path/to/cert/file
     vault_backend_tls_key_file: /path/to/key/file
