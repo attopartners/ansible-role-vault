@@ -4,10 +4,35 @@ backend "consul" {
 {% else %}
   address = "127.0.0.1:8500"
 {% endif %}
+{% if vault_backend_max_parallel is defined %}
+  max_parallel = "{{ vault_backend_max_parallel }}"
+{% endif %}
 {% if vault_backend_path is defined %}
   path = "{{ vault_backend_path }}"
 {% else %}
   path = "vault"
+{% endif %}
+{% if vault_backend_scheme is defined %}
+  scheme = "{{ vault_backend_scheme }}"
+{% endif %}
+{% if vault_backend_tls_ca_file is defined %}
+  tls_ca_file = "{{ vault_backend_tls_ca_file }}"
+{% endif %}
+{% if vault_backend_tls_cert_file is defined %}
+  tls_cert_file = "{{ vault_backend_tls_cert_file }}"
+{% endif %}
+{% if vault_backend_tls_key_file is defined %}
+  tls_key_file = "{{ vault_backend_tls_key_file }}"
+{% endif %}
+{% if vault_backend_tls_skip_verify is defined %}
+{%   if vault_backend_tls_skip_verify %}
+  tls_skip_verify = true
+{%   else %}
+  tls_skip_verify = false
+{%   endif %}
+{% endif %}
+{% if vault_backend_token is defined %}
+  token = "{{ vault_backend_token }}"
 {% endif %}
 }
 
@@ -25,6 +50,15 @@ listener "tcp" {
 {%   endif %}
 {% else %}
   tls_disable = 1
+{% endif %}
+{% if vault_listener_tls_cert_file is defined %}
+  tls_cert_file = "{{ vault_listener_tls_cert_file }}"
+{% endif %}
+{% if vault_listener_tls_key_file is defined %}
+  tls_key_file = "{{ vault_listener_tls_key_file }}"
+{% endif %}
+{% if vault_listener_tls_min_version is defined %}
+  tls_min_version = "{{ vault_listener_tls_min_version }}"
 {% endif %}
 }
 
