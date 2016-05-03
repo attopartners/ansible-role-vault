@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tkimball83/ansible-role-vault.svg?branch=master)](https://travis-ci.org/tkimball83/ansible-role-vault)
 
-This role installs and enables HashiCorp's Vault on RHEL/CentOS.
+This role installs and enables HashiCorp's vault on RHEL/CentOS.
 
 ## Requirements
 
