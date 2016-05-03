@@ -28,7 +28,7 @@ listener "tcp" {
 {% endif %}
 }
 
-{% if vault_telemetry_enable is defined and vault_telemtry_enable %}
+{% if vault_telemetry_enable is defined and vault_telemetry_enable %}
 telemetry {
 {%   if vault_telemetry_disable_hostname is defined %}
 {%     if vault_telemetry_disable_hostname %}
