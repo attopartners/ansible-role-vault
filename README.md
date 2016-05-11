@@ -13,7 +13,7 @@ None
 Available variables are listed below, along with default values:
 
     vault_backend_address: 127.0.0.1:8500
-    vault_backend_path: vault"
+    vault_backend_path: vault
     vault_listener_address: 127.0.0.1:8200
     vault_listener_tls_disable: True
     vault_telemetry_enable: True
