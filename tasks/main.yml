@@ -3,7 +3,7 @@
   tags: vault
   yum:
     name=vault
-    enablerepo=tkimball83
+    enablerepo=tkimball83-{{ tkimball83_pkg }}
     state=latest
     update_cache=yes
   register: vault_yum
