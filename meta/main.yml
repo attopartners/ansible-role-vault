@@ -1,6 +1,7 @@
 ---
 dependencies:
   - tkimball83.tkimball83
+  - tkimball83.consul
 galaxy_info:
   author: tkimball83
   description: "HashiCorp's vault for RHEL/CentOS"
