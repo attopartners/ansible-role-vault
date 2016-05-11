@@ -49,6 +49,14 @@ Additional variables available, not defined by default:
         - role: tkimball83.vault
           vault_listener_address: "{{ ansible_default_ipv4.address }}:8200"
           vault_listener_tls_disable: False
+
+## Partners
+
+[![packagecloud](http://dka575ofm4ao0.cloudfront.net/pages-transactional_logos/retina/10543/gKme3F4XRaC5EyKJzKsA)](https://packagecloud.io)
+
+Do you need trustworthy hosted package repositories?  Then packagecloud is for you.
+
+A big thank you to packagecloud for supporting the open source community!
          
 ## License
 
