@@ -68,7 +68,7 @@ listener "tcp" {
 telemetry {
 {%   for tkey, tvalue in vault_telemetry.iteritems()|sort %}
 {%     if tkey == 'disable_hostname' %}
-{%       if tkey %}
+{%       if tvalue %}
   disable_hostname = true
 {%       else %}
   disable_hostname = false
