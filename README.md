@@ -12,13 +12,11 @@ None
 
 Available variables are listed below, along with default values:
 
+    vault_backend: consul
     vault_backend_address: 127.0.0.1:8500
     vault_backend_path: vault
     vault_listener_address: 127.0.0.1:8200
     vault_listener_tls_disable: True
-    vault_telemetry_enable: True
-    vault_telemetry_disable_hostname: True
-    vault_telemetry_statsite_address: 127.0.0.1:8125
 
 Additional variables available, not defined by default:
 
@@ -37,6 +35,10 @@ Additional variables available, not defined by default:
     vault_log_file: /var/log/vault.log
     vault_log_level: info
     vault_pid_file: /var/run/vault.pid
+    vault_telemetry:
+      disable_hostname: True
+      statsd_address: 127.0.0.1:8125
+      statsite_address: 127.0.0.1:8125
 
 ## Dependencies
 

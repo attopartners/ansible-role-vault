@@ -1,40 +1,42 @@
-backend "consul" {
-{% if vault_backend_address is defined %}
+{% if vault_backend is defined %}
+backend "{{ vault_backend }}" {
+{%   if vault_backend_address is defined %}
   address = "{{ vault_backend_address }}"
-{% else %}
-  address = "127.0.0.1:8500"
-{% endif %}
-{% if vault_backend_max_parallel is defined %}
-  max_parallel = "{{ vault_backend_max_parallel }}"
-{% endif %}
-{% if vault_backend_path is defined %}
-  path = "{{ vault_backend_path }}"
-{% else %}
-  path = "vault"
-{% endif %}
-{% if vault_backend_scheme is defined %}
-  scheme = "{{ vault_backend_scheme }}"
-{% endif %}
-{% if vault_backend_tls_ca_file is defined %}
-  tls_ca_file = "{{ vault_backend_tls_ca_file }}"
-{% endif %}
-{% if vault_backend_tls_cert_file is defined %}
-  tls_cert_file = "{{ vault_backend_tls_cert_file }}"
-{% endif %}
-{% if vault_backend_tls_key_file is defined %}
-  tls_key_file = "{{ vault_backend_tls_key_file }}"
-{% endif %}
-{% if vault_backend_tls_skip_verify is defined %}
-{%   if vault_backend_tls_skip_verify %}
-  tls_skip_verify = 1
 {%   else %}
-  tls_skip_verify = 0
+  address = "127.0.0.1:8500"
 {%   endif %}
-{% endif %}
-{% if vault_backend_token is defined %}
+{%   if vault_backend_max_parallel is defined %}
+  max_parallel = "{{ vault_backend_max_parallel }}"
+{%   endif %}
+{%   if vault_backend_path is defined %}
+  path = "{{ vault_backend_path }}"
+{%   else %}
+  path = "vault"
+{%   endif %}
+{%   if vault_backend_scheme is defined %}
+  scheme = "{{ vault_backend_scheme }}"
+{%   endif %}
+{%   if vault_backend_tls_ca_file is defined %}
+  tls_ca_file = "{{ vault_backend_tls_ca_file }}"
+{%   endif %}
+{%   if vault_backend_tls_cert_file is defined %}
+  tls_cert_file = "{{ vault_backend_tls_cert_file }}"
+{%   endif %}
+{%   if vault_backend_tls_key_file is defined %}
+  tls_key_file = "{{ vault_backend_tls_key_file }}"
+{%   endif %}
+{%   if vault_backend_tls_skip_verify is defined %}
+{%     if vault_backend_tls_skip_verify %}
+  tls_skip_verify = 1
+{%     else %}
+  tls_skip_verify = 0
+{%     endif %}
+{%   endif %}
+{%   if vault_backend_token is defined %}
   token = "{{ vault_backend_token }}"
-{% endif %}
+{%   endif %}
 }
+{% endif %}
 
 listener "tcp" {
 {% if vault_listener_address is defined %}
@@ -62,24 +64,18 @@ listener "tcp" {
 {% endif %}
 }
 
-{% if vault_telemetry_enable is defined and vault_telemetry_enable %}
+{% if vault_telemetry is defined %}
 telemetry {
-{%   if vault_telemetry_disable_hostname is defined %}
-{%     if vault_telemetry_disable_hostname %}
+{%   for tkey, tvalue in vault_telemetry.iteritems()|sort %}
+{%     if tkey == 'disable_hostname' %}
+{%       if tkey %}
   disable_hostname = true
-{%     else %}
+{%       else %}
   disable_hostname = false
+{%       endif %}
+{%     else %}
+  {{ tkey }} = "{{ tvalue }}"
 {%     endif %}
-{%   else %}
-  disable_hostname = true
-{%   endif %}
-{%   if vault_telemetry_statsd_address is defined %}
-  statsd_address = "{{ vault_telemetry_statsd_address }}"
-{%   endif %}
-{%   if vault_telemetry_statsite_address is defined %}
-  statsite_address = "{{ vault_telemetry_statsite_address }}"
-{%   else %}
-  statsite_address = "127.0.0.1:8125"
-{%   endif %}
+{%   endfor %}
 }
 {% endif %}
