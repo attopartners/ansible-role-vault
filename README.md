@@ -22,7 +22,7 @@ Available variables are listed below, along with default values:
       storage: consul
     vault_listener:
       address: 127.0.0.1:8200
-      tls_disable: 1
+      tls_disable: '1'
 
 Additional variables available, not defined by default:
 
@@ -37,11 +37,11 @@ Additional variables available, not defined by default:
       tls_ca_file: /path/to/ca/file
       tls_cert_file: /path/to/cert/file
       tls_key_file: /path/to/key/file
-      tls_skip_verify: 1
+      tls_skip_verify: '1'
     vault_config_path: /etc/vault/vault.hcl
     vault_listener:
       address: 127.0.0.1:8200
-      tls_disable: 1
+      tls_disable: '1'
       tls_cert_file: /path/to/cert/file
       tls_key_file: /path/to/key/file
       tls_min_version: tls12
