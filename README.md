@@ -65,7 +65,7 @@ Additional variables available, not defined by default:
         - role: tkimball83.vault
          vault_listener:
            address: "{{ ansible_default_ipv4.address }}:8200"
-           tls_disable: 0
+           tls_disable: '0'
 
 ## Partners
 
