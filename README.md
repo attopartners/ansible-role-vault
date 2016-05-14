@@ -22,7 +22,7 @@ Available variables are listed below, along with default values:
       storage: consul
     vault_listener:
       address: 127.0.0.1:8200
-      tls_disable: True
+      tls_disable: 1
 
 Additional variables available, not defined by default:
 
@@ -41,7 +41,7 @@ Additional variables available, not defined by default:
     vault_config_path: /etc/vault/vault.hcl
     vault_listener:
       address: 127.0.0.1:8200
-      tls_disable: True
+      tls_disable: 1
       tls_cert_file: /path/to/cert/file
       tls_key_file: /path/to/key/file
       tls_min_version: tls12
@@ -64,7 +64,7 @@ Additional variables available, not defined by default:
         - role: tkimball83.vault
          vault_listener:
            address: "{{ ansible_default_ipv4.address }}:8200"
-           tls_disable: False
+           tls_disable: 0
 
 ## Partners
 
