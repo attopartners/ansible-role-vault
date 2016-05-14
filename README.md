@@ -37,7 +37,7 @@ Additional variables available, not defined by default:
       tls_ca_file: /path/to/ca/file
       tls_cert_file: /path/to/cert/file
       tls_key_file: /path/to/key/file
-      tls_skip_verify: False
+      tls_skip_verify: 1
     vault_config_path: /etc/vault/vault.hcl
     vault_listener:
       address: 127.0.0.1:8200
