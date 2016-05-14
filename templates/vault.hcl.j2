@@ -3,7 +3,11 @@
 backend "{{ vault_backend.storage }}" {
 {%     for vkey, vvalue in vault_backend.iteritems()|sort %}
 {%       if vkey != 'storage' %}
-{%         if vvalue == True %}
+{%         if vvalue == 1 %}
+  {{ vkey }} = 1
+{%         elif vvalue == 0 %}
+  {{ vkey }} = 0
+{%         elif vvalue == True %}
   {{ vkey }} = true
 {%         elif vvalue == False %}
   {{ vkey }} = false
@@ -19,7 +23,11 @@ backend "{{ vault_backend.storage }}" {
 {% if vault_listener is defined %}
 listener "tcp" {
 {%   for lkey, lvalue in vault_listener.iteritems()|sort %}
-{%     if lvalue == True %}
+{%     if lvalue == 1 %}
+  {{ lkey }} = 1
+{%     elif lvalue == 0 %}
+  {{ lkey }} = 0
+{%     elif lvalue == True %}
   {{ lkey }} = true
 {%     elif lvalue == False %}
   {{ lkey }} = false
@@ -33,7 +41,11 @@ listener "tcp" {
 {% if vault_telemetry is defined %}
 telemetry {
 {%   for tkey, tvalue in vault_telemetry.iteritems()|sort %}
-{%     if tvalue == True %}
+{%     if tvalue == 1 %}
+  {{ tkey }} = 1
+{%     elif tvalue == 0 %}
+  {{ tkey }} = 0
+{%     elif tvalue == True %}
   {{ tkey }} = true
 {%     elif tvalue == False %}
   {{ tkey }} = false
