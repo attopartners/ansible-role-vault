@@ -1,68 +1,34 @@
 {% if vault_backend is defined %}
-backend "{{ vault_backend }}" {
-{%   if vault_backend_address is defined %}
-  address = "{{ vault_backend_address }}"
-{%   else %}
-  address = "127.0.0.1:8500"
-{%   endif %}
-{%   if vault_backend_max_parallel is defined %}
-  max_parallel = "{{ vault_backend_max_parallel }}"
-{%   endif %}
-{%   if vault_backend_path is defined %}
-  path = "{{ vault_backend_path }}"
-{%   else %}
-  path = "vault"
-{%   endif %}
-{%   if vault_backend_scheme is defined %}
-  scheme = "{{ vault_backend_scheme }}"
-{%   endif %}
-{%   if vault_backend_tls_ca_file is defined %}
-  tls_ca_file = "{{ vault_backend_tls_ca_file }}"
-{%   endif %}
-{%   if vault_backend_tls_cert_file is defined %}
-  tls_cert_file = "{{ vault_backend_tls_cert_file }}"
-{%   endif %}
-{%   if vault_backend_tls_key_file is defined %}
-  tls_key_file = "{{ vault_backend_tls_key_file }}"
-{%   endif %}
-{%   if vault_backend_tls_skip_verify is defined %}
-{%     if vault_backend_tls_skip_verify %}
-  tls_skip_verify = 1
-{%     else %}
-  tls_skip_verify = 0
-{%     endif %}
-{%   endif %}
-{%   if vault_backend_token is defined %}
-  token = "{{ vault_backend_token }}"
-{%   endif %}
+{%   if vault_backend.storage is defined %}
+backend "{{ vault_backend.storage }}" {
+{%     for vkey, vvalue in vault_backend.iteritems()|sort %}
+{%       if vkey != 'storage' %}
+{%         if vvalue == True %}
+  {{ vkey }} = true
+{%         elif vvalue == False %}
+  {{ vkey }} = false
+{%         else %}
+  {{ vkey }} = "{{ vvalue }}"
+{%         endif %}
+{%       endif %}
+{%     endfor %}
 }
+{%   endif %}
 {% endif %}
 
+{% if vault_listener is defined %}
 listener "tcp" {
-{% if vault_listener_address is defined %}
-  address = "{{ vault_listener_address }}"
-{% else %}
-  address = "127.0.0.1:8200"
-{% endif %}
-{% if vault_listener_tls_disable is defined %}
-{%   if vault_listener_tls_disable %}
-  tls_disable = 1
-{%   else %}
-  tls_disable = 0
-{%   endif %}
-{% else %}
-  tls_disable = 1
-{% endif %}
-{% if vault_listener_tls_cert_file is defined %}
-  tls_cert_file = "{{ vault_listener_tls_cert_file }}"
-{% endif %}
-{% if vault_listener_tls_key_file is defined %}
-  tls_key_file = "{{ vault_listener_tls_key_file }}"
-{% endif %}
-{% if vault_listener_tls_min_version is defined %}
-  tls_min_version = "{{ vault_listener_tls_min_version }}"
-{% endif %}
+{%   for lkey, lvalue in vault_listener.iteritems()|sort %}
+{%     if lvalue == True %}
+  {{ lkey }} = true
+{%     elif lvalue == False %}
+  {{ lkey }} = false
+{%     else %}
+  {{ lkey }} = "{{ lvalue }}"
+{%     endif %}
+{%   endfor %}
 }
+{% endif %}
 
 {% if vault_telemetry is defined %}
 telemetry {

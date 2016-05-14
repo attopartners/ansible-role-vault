@@ -6,32 +6,45 @@ This role installs and enables HashiCorp's vault on RHEL/CentOS.
 
 ## Requirements
 
-None
+This role requies a storage backend.  By default it's configured to use consul.
+
+If you're interested in a role for consul it can be found here:
+
+ *  * https://galaxy.ansible.com/tkimball83/tkimball83/
 
 ## Role Variables
 
 Available variables are listed below, along with default values:
 
-    vault_backend: consul
-    vault_backend_address: 127.0.0.1:8500
-    vault_backend_path: vault
-    vault_listener_address: 127.0.0.1:8200
-    vault_listener_tls_disable: True
+    vault_backend:
+      address: 127.0.0.1:8500
+      path: vault
+      storage: consul
+    vault_listener:
+      address: 127.0.0.1:8200
+      tls_disable: True
 
 Additional variables available, not defined by default:
 
     vault_bin: /usr/sbin/vault
-    vault_backend_scheme: https
-    vault_backend_token: xxxxxx
-    vault_backend_max_parallel: 128
-    vault_backend_tls_skip_verify: False
-    vault_backend_tls_ca_file: /path/to/ca/file
-    vault_backend_tls_cert_file: /path/to/cert/file
-    vault_backend_tls_key_file: /path/to/key/file
+    vault_backend:
+      address: 127.0.0.1:8500
+      max_parallel: 128
+      path: vault
+      scheme: https
+      storage: consul
+      token: xxxxxxxxxx
+      tls_ca_file: /path/to/ca/file
+      tls_cert_file: /path/to/cert/file
+      tls_key_file: /path/to/key/file
+      tls_skip_verify: False
     vault_config_path: /etc/vault/vault.hcl
-    vault_listener_tls_cert_file: /path/to/cert/file
-    vault_listener_tls_key_file: /path/to/key/file
-    vault_listener_tls_min_version: tls12
+    vault_listener:
+      address: 127.0.0.1:8200
+      tls_disable: True
+      tls_cert_file: /path/to/cert/file
+      tls_key_file: /path/to/key/file
+      tls_min_version: tls12
     vault_log_file: /var/log/vault.log
     vault_log_level: info
     vault_pid_file: /var/run/vault.pid
@@ -49,8 +62,9 @@ Additional variables available, not defined by default:
     - hosts: servers
       roles:
         - role: tkimball83.vault
-          vault_listener_address: "{{ ansible_default_ipv4.address }}:8200"
-          vault_listener_tls_disable: False
+         vault_listener:
+           address: "{{ ansible_default_ipv4.address }}:8200"
+           tls_disable: False
 
 ## Partners
 
