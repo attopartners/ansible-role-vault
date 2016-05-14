@@ -6,7 +6,8 @@ This role installs and enables HashiCorp's vault on RHEL/CentOS.
 
 ## Requirements
 
-This role requies a storage backend.  By default it's configured to use consul.
+This role requies a storage backend.  By default it's configured to use consul but supports all storage backends.  Simply
+update the hash with the correct options for your backend.
 
 If you're interested in a role for consul it can be found here:
 
