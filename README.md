@@ -12,7 +12,7 @@ the dict with the correct options for your backend.
 
 An ansible role for consul can be found here:
 
- * https://galaxy.ansible.com/tkimball83/tkimball83/
+ * https://galaxy.ansible.com/tkimball83/consul/
 
 ## Role Variables
 
