@@ -6,8 +6,9 @@ This role installs and enables HashiCorp's vault on RHEL/CentOS.
 
 ## Requirements
 
-This role requies a storage backend.  By default it's configured to use consul but supports all storage backends.  Simply
-update the hash with the correct options for your backend.
+This role requies a storage backend.  By default it's configured
+to use consul but supports all storage backends.  Simply update
+the dict with the correct options for your backend.
 
 If you're interested in a role for consul it can be found here:
 
@@ -58,14 +59,32 @@ Additional variables available, not defined by default:
 
  * https://galaxy.ansible.com/tkimball83/tkimball83/
 
-## Example Playbook
+## Example Playbooks
+
+Example playbook with a consul storage backend:
 
     - hosts: servers
       roles:
         - role: tkimball83.vault
-         vault_listener:
-           address: "{{ ansible_default_ipv4.address }}:8200"
-           tls_disable: '0'
+          vault_listener:
+            address: "{{ ansible_default_ipv4.address }}:8200"
+            tls_disable: '0'
+
+Example playbook with a mysql storage backend:
+
+    - hosts: servers
+      roles:
+        - role: tkimball83.vault
+          vault_backend:
+            address: 127.0.0.1:3306
+            database: vault
+            password: vault
+            storage: mysql
+            table: vault
+            username: vault
+          vault_listener:
+            address: "{{ ansible_default_ipv4.address }}:8200"
+            tls_disable: '0'
 
 ## Partners
 
