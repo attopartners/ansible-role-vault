@@ -10,7 +10,7 @@ This role requies a storage backend.  By default it's configured
 to use consul but supports all storage backends.  Simply update
 the dict with the correct options for your backend.
 
-An ansibile role for consul can be found here:
+An ansible role for consul can be found here:
 
  * https://galaxy.ansible.com/tkimball83/tkimball83/
 
