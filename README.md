@@ -66,6 +66,10 @@ Example playbook with a consul storage backend:
     - hosts: servers
       roles:
         - role: tkimball83.vault
+          vault_backend:
+            address: 127.0.0.1:8500
+            path: vault
+            storage: consul
           vault_listener:
             address: "{{ ansible_default_ipv4.address }}:8200"
             tls_disable: '0'
